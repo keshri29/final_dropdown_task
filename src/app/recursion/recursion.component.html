@@ -1,0 +1,30 @@
+<div style=" display: flex; margin-right: 60%; width: 100%;">
+  <ul *ngIf="isOpen" 
+  style="
+    margin-top: 7px;
+    width: 146px;
+    margin-left: 270px;">
+    <li *ngFor="let option of options" (click)="selectOption(option)" style="border: 2px solid gray;"> 
+      {{ option.label }}
+      @if(option.value === 'table'){
+        <i class="fas fa-table"  style="margin-left: -47px; display: flex;" ></i> 
+      }
+      @else if( option.value === 'folder'){
+        <i  class="fas fa-folder" style="margin-left: -47px; display: flex;" ></i>
+      }
+    </li>
+  </ul>
+  
+  <div *ngIf="selectedOption?.value === 'table'" >
+    <input type="text" [(ngModel)]="inputValue" placeholder="Enter name" style="height: 37px; margin-left: 20px;margin-top: 12px;">
+    <button (click)="cancel()" class="wrong">Delete</button>
+    <button (click)="save()" class="correct">Save</button>
+  </div>
+
+    <div *ngIf="selectedOption?.value === 'folder'" style="height: 37px; margin-left: -300px; margin-top: 50px;">
+      <button class="plus"  (click)="plusbtn()">➕
+      </button>
+      <app-recursion *ngIf="isPlus" [isOpen]="isPlus"></app-recursion>
+
+ </div>
+ </div>
